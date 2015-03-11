@@ -9,18 +9,22 @@ class Logger:
         # Unused
         pass
 
+    # Log a message
     @staticmethod
     def log_message(message):
         print '\033[94m' + '-- ' + str(message) + '\033[0m'
 
+    # Log an error
     @staticmethod
     def log_error(message):
         print '\033[91m' + 'Error: ' + str(message) + '\033[0m'
 
+    # Log success
     @staticmethod
     def log_success(message):
         print '\033[92m' + 'Success: ' + str(message) + '\033[0m'
 
+    # Log a result
     @staticmethod
     def log_result(message):
         print '\033[93m' + 'Result: ' + str(message) + '\033[0m'
