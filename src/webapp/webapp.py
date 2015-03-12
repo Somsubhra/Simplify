@@ -1,7 +1,7 @@
 __author__ = 's7a'
 
 # All imports
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template
 from extras import Logger
 
 
@@ -18,7 +18,7 @@ class WebApp:
 
         @self.app.route('/')
         def index():
-            return "test"
+            return render_template('index.html')
 
         Logger.log_success("Started application server successfully")
 
