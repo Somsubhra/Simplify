@@ -3,6 +3,7 @@ __author__ = 's7a'
 # All imports
 from extras import Logger
 from extras import Sanitizer
+from replacer import Replacer
 from os import walk, path, stat, makedirs
 
 
@@ -14,6 +15,8 @@ class LexicalSimplifier:
         Logger.log_message('Initializing Lexical Simplifier')
         self.in_dir = in_dir
         self.out_dir = out_dir
+
+        self.replacer = Replacer()
 
     # Run the Lexical Simplifier
     def run(self):
@@ -40,8 +43,7 @@ class LexicalSimplifier:
         Logger.log_success('Lexical Simplifier finished successfully')
 
     # Simplify a given file
-    @staticmethod
-    def simplify(in_file, out_file):
+    def simplify(self, in_file, out_file):
         Logger.log_message('Running Lexical Simplifier on ' + in_file)
 
         input_file = open(in_file, 'r')
@@ -57,7 +59,8 @@ class LexicalSimplifier:
                 if sanitized_word == '':
                     continue
 
-                new_words.append(sanitized_word)
+                replaced_word = self.replacer.replacement(sanitized_word)
+                new_words.append(replaced_word)
 
             output_file.write(' '.join(new_words) + '\n')
 

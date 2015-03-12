@@ -13,4 +13,4 @@ class Sanitizer:
     @staticmethod
     def sanitize_word(word):
         alphabets = "abcdefghijklmnopqrstuvwxyz"
-        return ''.join(w for w in word if w in alphabets)
+        return ''.join(w for w in word if w in alphabets).lower()
