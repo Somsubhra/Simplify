@@ -15,7 +15,7 @@ class Synonyms:
     # Get the synonyms of a word
     @staticmethod
     def get(word):
-        synonyms = []
+        synonyms = [word]
         sets = wordnet.synsets(word)
 
         for item in sets:
