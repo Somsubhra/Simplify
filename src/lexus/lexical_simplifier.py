@@ -2,6 +2,7 @@ __author__ = 's7a'
 
 # All imports
 from extras import Logger
+from extras import Sanitizer
 from os import walk, path, stat, makedirs
 
 
@@ -45,6 +46,20 @@ class LexicalSimplifier:
 
         input_file = open(in_file, 'r')
         output_file = open(out_file, 'w')
+
+        for line in input_file.readlines():
+            words = [str(word) for word in line.split()]
+            new_words = []
+
+            for word in words:
+                sanitized_word = Sanitizer.sanitize_word(word)
+
+                if sanitized_word == '':
+                    continue
+
+                new_words.append(sanitized_word)
+
+            output_file.write(' '.join(new_words) + '\n')
 
         input_file.close()
         output_file.close()
