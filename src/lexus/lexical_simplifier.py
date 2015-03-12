@@ -85,4 +85,4 @@ class LexicalSimplifier:
             replaced_word = replacer.replacement(sanitized_word)
             new_words.append(replaced_word)
 
-        return ' '.join(new_words) + '\m'
+        return ' '.join(new_words)

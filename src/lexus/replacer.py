@@ -15,5 +15,9 @@ class Replacer:
 
     # Replace the word with its alternative
     def replacement(self, word):
+
+        if word == '':
+            return ''
+
         words = Synonyms.get(word)
         return self.kf.maximum(words)

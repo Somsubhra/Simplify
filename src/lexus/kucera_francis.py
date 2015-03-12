@@ -24,7 +24,11 @@ class KuceraFrancis:
 
     # Get the word with maximum Kucera Francis frequency
     def maximum(self, words):
-        result = ''
+
+        if len(words) == 0:
+            return ''
+
+        result = words[0]
 
         for word in words:
             if self.frequency(word) > self.frequency(result):
