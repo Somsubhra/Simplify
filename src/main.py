@@ -5,13 +5,14 @@ from extras import Logger
 from lexus import LexicalSimplifier
 from syntax import SyntacticSimplifier
 
+from os import path
 
 # The main method
 def main():
     Logger.log_message("Running application Simplify")
 
     # Lexical simplification
-    lexical_simplifier = LexicalSimplifier('', '')
+    lexical_simplifier = LexicalSimplifier('corpus', path.join('out', 'lexis'))
     lexical_simplifier.run()
 
     # Syntactic simplification
