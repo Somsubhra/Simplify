@@ -30,5 +30,25 @@
 </div>
 <script type="text/javascript" src="/static/jquery/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#simplify-btn").click(function() {
+            var txt = $("#txt-inp").val();
+
+            $.getJSON('/api/simplify',
+                    {
+                        text: txt
+                    }, function(data) {
+                        if(data.success) {
+                            $("#result").html("<div class='well'>" + data.result + "</div>");
+                        } else {
+                            $("#result").html("<div class='alert alert-danger'>" +
+                                    "<span class='glyphicon glyphicon-exclamation-sign'></span>" +
+                                    " Some error occurred!</div>");
+                        }
+                    }, "json");
+        });
+    });
+</script>
 </body>
 </html>
