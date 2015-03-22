@@ -18,7 +18,7 @@ class NGramFrequency:
 
     # Run the N-Gram Frequency Counter
     def run(self):
-        Logger.log_message('Running N-Gram Frequency counter')
+        Logger.log_message('Running ' + str(self.n) + '-Gram Frequency counter')
 
         try:
             stat(self.in_dir)
@@ -33,11 +33,11 @@ class NGramFrequency:
 
         self.dump_results()
 
-        Logger.log_success('N-Gram Frequency counter exited successfully')
+        Logger.log_success(str(self.n) + '-Gram Frequency counter exited successfully')
 
     # Parse a given file and build the N-Gram frequency table
     def parse_file(self, in_file):
-        Logger.log_message('Running N-Gram Frequency counter on ' + in_file)
+        Logger.log_message('Running ' + str(self.n) + '-Gram Frequency counter on ' + in_file)
 
         input_file = open(in_file)
 
@@ -71,7 +71,7 @@ class NGramFrequency:
     # Dump the results to the output file
     def dump_results(self):
 
-        Logger.log_message('Writing N-Gram table to ' + self.out_file)
+        Logger.log_message('Writing ' + str(self.n) + '-Gram table to ' + self.out_file)
 
         output_file = open(self.out_file, 'w+')
 
@@ -80,4 +80,4 @@ class NGramFrequency:
 
         output_file.close()
 
-        Logger.log_success('Finished writing N-Gram table to ' + self.out_file)
+        Logger.log_success('Finished writing ' + str(self.n) + '-Gram table to ' + self.out_file)
