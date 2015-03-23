@@ -21,3 +21,7 @@ class Replacer:
 
         words = Synonyms.get(word)
         return self.kf.maximum(words)
+
+    # Give a detailed analysis along with the replacement
+    def detailed_replacement(self, word):
+        pass
