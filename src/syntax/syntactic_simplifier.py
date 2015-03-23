@@ -1,8 +1,5 @@
 __author__ = 's7a'
 
-# All imports
-from extras import Logger
-
 
 # The Syntactic simplification class
 class SyntacticSimplifier:
