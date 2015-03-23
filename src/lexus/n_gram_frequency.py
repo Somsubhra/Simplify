@@ -15,6 +15,7 @@ class NGramFrequency:
         self.in_dir = in_dir
         self.out_file = out_file
         self.table = {}
+        self.neighbors = {}
 
     # Run the N-Gram Frequency Counter
     def run(self):
@@ -56,15 +57,31 @@ class NGramFrequency:
         # Parse the content
         for i in range(length - self.n + 1):
             s = ""
+            neighbor_str = ""
+            word = ""
+
             for j in range(self.n):
                 s += content[i + j]
+
+                if j == self.n / 2:
+                    word = content[i + j]
+                else:
+                    neighbor_str += content[i + j]
+                    pass
+
                 if j != self.n - 1:
                     s += '|'
+                    neighbor_str += '|'
 
             if s in self.table:
                 self.table[s] += 1
             else:
                 self.table[s] = 1
+
+            if neighbor_str in self.neighbors:
+                self.neighbors[neighbor_str].append(word)
+            else:
+                self.neighbors[neighbor_str] = [word]
 
         input_file.close()
 
