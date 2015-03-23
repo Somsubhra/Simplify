@@ -85,6 +85,10 @@ class NGramFrequency:
 
         input_file.close()
 
+    # Return the neighbors of words
+    def get_neighbors(self):
+        return self.neighbors
+
     # Dump the results to the output file
     def dump_results(self):
 
