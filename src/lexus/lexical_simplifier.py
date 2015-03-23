@@ -1,7 +1,6 @@
 __author__ = 's7a'
 
 # All imports
-from extras import Logger
 from extras import Sanitizer
 from replacer import Replacer
 
@@ -11,6 +10,7 @@ class LexicalSimplifier:
 
     # Constructor for the Lexical Simplifier
     def __init__(self):
+        # Unused
         pass
 
     # Simplify a given content

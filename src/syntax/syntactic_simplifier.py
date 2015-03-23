@@ -9,8 +9,8 @@ class SyntacticSimplifier:
 
     # Constructor for the Syntactic Simplifier
     def __init__(self):
-        Logger.log_message('Initializing Syntactic Simplifier')
-        Logger.log_success('Syntactic Simplifier initialized successfully')
+        # Unused
+        pass
 
     @staticmethod
     def simplify(content):
