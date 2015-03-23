@@ -40,15 +40,18 @@ class LWLM:
                 regexp += '|'
 
         # Get the alternate words from LWLM
-        alt_words = [word]
+        alt_words = []
 
         if regexp in self.regexp_table:
             words = str(self.regexp_table[regexp]).split()
 
-            for word in words:
-                alt_words.append(str(word))
+            for w in words:
+                alt_words.append(str(w))
 
-        return alt_words
+        if word not in alt_words:
+            alt_words.append(word)
+
+        return list(set(alt_words))
 
     # Build the LWLM tables
     @staticmethod

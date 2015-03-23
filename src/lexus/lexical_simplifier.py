@@ -15,18 +15,30 @@ class LexicalSimplifier:
 
     # Simplify a given content
     @staticmethod
-    def simplify(content):
+    def simplify(content, lwlm_n):
         words = [str(word) for word in content.split()]
-        new_words = []
 
-        for word in words:
-            sanitized_word = Sanitizer.sanitize_word(word)
+        length = len(words)
+
+        results = []
+
+        for i in range(length):
+
+            sanitized_word = Sanitizer.sanitize_word(words[i])
 
             if sanitized_word == '':
                 continue
 
-            replacer = Replacer()
-            replaced_word = replacer.replacement(sanitized_word)
-            new_words.append(replaced_word)
+            neighbors = []
 
-        return ' '.join(new_words)
+            if not(i < lwlm_n / 2 or i > length - 1 - lwlm_n / 2):
+                for j in range(1, lwlm_n / 2 + 1):
+                    neighbors.append(Sanitizer.sanitize_word(words[i - j]))
+                for j in range(1, lwlm_n / 2 + 1):
+                    neighbors.append(Sanitizer.sanitize_word(words[i + j]))
+
+            replacer = Replacer()
+            result = replacer.detailed_replacement(sanitized_word, neighbors)
+            results.append(result)
+
+        return results

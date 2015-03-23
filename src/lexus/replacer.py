@@ -1,6 +1,7 @@
 __author__ = 's7a'
 
 # All imports
+from lwlm import LWLM
 from kucera_francis import KuceraFrancis
 from synonyms import Synonyms
 from os import path
@@ -12,16 +13,28 @@ class Replacer:
     # Constructor for the Replacer class
     def __init__(self):
         self.kf = KuceraFrancis(path.join('data', 'kucera_francis.csv'))
-
-    # Replace the word with its alternative
-    def replacement(self, word):
-
-        if word == '':
-            return ''
-
-        words = Synonyms.get(word)
-        return self.kf.maximum(words)
+        self.lwlm = LWLM(path.join('out', '3-gram-regexp.csv'))
 
     # Give a detailed analysis along with the replacement
-    def detailed_replacement(self, word):
-        pass
+    def detailed_replacement(self, word, neighbors):
+
+        replaced_word = ''
+
+        if word == '':
+            return {
+                'alt_word': replaced_word,
+                'wordnet': '',
+                'lwlm': '',
+                'intersection': ''
+            }
+
+        wordnet_words = Synonyms.get(word)
+        lwlm_words = self.lwlm.get(word, neighbors)
+        intersection_words = list(set(wordnet_words) & set(lwlm_words))
+
+        return {
+            'alt_word': self.kf.maximum(intersection_words),
+            'wordnet': str(wordnet_words),
+            'lwlm': str(lwlm_words),
+            'intersection': str(intersection_words)
+        }

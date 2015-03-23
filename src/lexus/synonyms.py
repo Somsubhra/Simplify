@@ -15,10 +15,13 @@ class Synonyms:
     # Get the synonyms of a word
     @staticmethod
     def get(word):
-        synonyms = [word]
+        synonyms = []
         sets = wordnet.synsets(word)
 
         for item in sets:
             synonyms.append(str(item.name()).split('.')[0])
 
-        return synonyms
+        if word not in synonyms:
+            synonyms.append(word)
+
+        return list(set(synonyms))
