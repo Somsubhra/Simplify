@@ -22,7 +22,9 @@ class LWLM:
         self.dump_results()
 
     # Get the lwlm words for a given word
-    def get(self, word, neighbors, n):
+    def get(self, word, neighbors):
+
+        n = len(neighbors) + 1
 
         # Construct the neighbor string
         neighbor_str = ""
