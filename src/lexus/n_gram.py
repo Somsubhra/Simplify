@@ -6,18 +6,17 @@ from extras import Sanitizer
 from os import walk, stat, path
 
 
-# Builds up the N-Gram Frequency table
-class NGramFrequency:
+# The N-Gram class
+class NGram:
 
-    # Constructor for the N-Gram Frequency counter
-    def __init__(self, n, in_dir, out_file):
+    # Constructor for the N-Gram class
+    def __init__(self, n, in_dir):
         self.n = n
         self.in_dir = in_dir
-        self.out_file = out_file
         self.table = {}
         self.neighbors = {}
 
-    # Run the N-Gram Frequency Counter
+    # Run the N-Gram utility
     def run(self):
         Logger.log_message('Running ' + str(self.n) + '-Gram Frequency counter')
 
@@ -36,7 +35,7 @@ class NGramFrequency:
 
         Logger.log_success(str(self.n) + '-Gram Frequency counter exited successfully')
 
-    # Parse a given file and build the N-Gram frequency table
+    # Parse a given file and build the N-Gram tables
     def parse_file(self, in_file):
         Logger.log_message('Running ' + str(self.n) + '-Gram Frequency counter on ' + in_file)
 
@@ -64,6 +63,7 @@ class NGramFrequency:
                 s += content[i + j]
 
                 if j == self.n / 2:
+                    neighbor_str += '*'
                     word = content[i + j]
                 else:
                     neighbor_str += content[i + j]
@@ -85,20 +85,27 @@ class NGramFrequency:
 
         input_file.close()
 
-    # Return the neighbors of words
-    def get_neighbors(self):
-        return self.neighbors
-
     # Dump the results to the output file
     def dump_results(self):
 
-        Logger.log_message('Writing ' + str(self.n) + '-Gram table to ' + self.out_file)
-
-        output_file = open(self.out_file, 'w+')
+        out_file = path.join('out', str(self.n) + '-gram.csv')
+        Logger.log_message('Writing ' + str(self.n) + '-Gram table to ' + out_file)
+        output_file = open(out_file, 'w+')
 
         for s in self.table:
             output_file.write(s + ';' + str(self.table[s]) + '\n')
 
         output_file.close()
+        Logger.log_success('Finished writing ' + str(self.n) + '-Gram table to ' + out_file)
 
-        Logger.log_success('Finished writing ' + str(self.n) + '-Gram table to ' + self.out_file)
+        out_file = path.join('out', str(self.n) + '-gram-regexp.csv')
+        Logger.log_message('Writing ' + str(self.n) + '-Gram Regular Expressions to ' + out_file)
+        output_file = open(out_file, 'w+')
+
+        for nb in self.neighbors:
+            words = set(self.neighbors[nb])
+            col = ' '.join(w for w in words)
+            output_file.write(nb + ';' + col + '\n')
+
+        output_file.close()
+        Logger.log_success(str(self.n) + '-Gram Regular Expressions have been written to ' + out_file)
