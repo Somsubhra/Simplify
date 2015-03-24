@@ -22,6 +22,8 @@ class LexicalSimplifier:
 
         results = []
 
+        replacer = Replacer(lwlm_n)
+
         for i in range(length):
 
             sanitized_word = Sanitizer.sanitize_word(words[i])
@@ -29,7 +31,6 @@ class LexicalSimplifier:
             if sanitized_word == '':
                 continue
 
-            replacer = Replacer(lwlm_n)
             result = replacer.detailed_replacement(sanitized_word)
             results.append(result)
 
