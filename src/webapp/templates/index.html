@@ -35,7 +35,7 @@
         <div class="col-md-12" id="result"></div>
     </div>
     <div class="row">
-        <div class="col-md-12" id="analysis"></div>
+        <div class="col-md-12" id="lexical-analysis"></div>
     </div>
 </div>
 <script type="text/javascript" src="/static/jquery/jquery-1.11.2.min.js"></script>
@@ -56,12 +56,33 @@
                             var reconstruction = "";
                             var l = result.length;
 
+                            var html = '<table class="table table-bordered">' +
+                                    '<tr>' +
+                                    '<th>Word</th>' +
+                                    '<th>Wordnet Words</th>' +
+                                    '<th>LWLM words</th>' +
+                                    '<th>Intersection</th>' +
+                                    '<th>Replacement</th>' +
+                                    '</tr>';
+
                             for(var i = 0; i < l; i++) {
-                                reconstruction += result[i].alt_word + " ";
+                                var item = result[i];
+                                reconstruction += item.alt_word + " ";
+                                html += "<tr>" +
+                                "<td>" + item.word + "</td>" +
+                                "<td>" + item.wordnet + "</td>" +
+                                "<td>" + item.lwlm + "</td>" +
+                                "<td>" + item.intersection + "</td>" +
+                                "<td>" + item.alt_word + "</td>" +
+                                "</tr>";
                             }
 
+                            html += '</table>';
+
                             $("#result").html("<h3>Result</h3><div class='well'>" + reconstruction + "</div>");
-                            $("#analysis").html("<h3>Analysis</h3>")
+
+
+                            $("#lexical-analysis").html("<h3>Lexical Analysis</h3>" + html);
                         } else {
                             $("#result").html("<div class='alert alert-danger'>" +
                                     "<span class='glyphicon glyphicon-exclamation-sign'></span>" +

@@ -22,6 +22,7 @@ class Replacer:
 
         if word == '':
             return {
+                'word': word,
                 'alt_word': replaced_word,
                 'wordnet': '',
                 'lwlm': '',
@@ -33,6 +34,7 @@ class Replacer:
         intersection_words = list(set(wordnet_words) & set(lwlm_words))
 
         return {
+            'word': word,
             'alt_word': self.kf.maximum(intersection_words),
             'wordnet': str(wordnet_words),
             'lwlm': str(lwlm_words),
