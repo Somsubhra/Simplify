@@ -34,6 +34,9 @@
     <div class="row">
         <div class="col-md-12" id="result"></div>
     </div>
+    <div class="row">
+        <div class="col-md-12" id="analysis"></div>
+    </div>
 </div>
 <script type="text/javascript" src="/static/jquery/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
@@ -49,7 +52,16 @@
                         n: n
                     }, function(data) {
                         if(data.success) {
-                            $("#result").html("<div class='well'>" + data.result + "</div>");
+                            var result = data.result;
+                            var reconstruction = "";
+                            var l = result.length;
+
+                            for(var i = 0; i < l; i++) {
+                                reconstruction += result[i].alt_word + " ";
+                            }
+
+                            $("#result").html("<h3>Result</h3><div class='well'>" + reconstruction + "</div>");
+                            $("#analysis").html("<h3>Analysis</h3>")
                         } else {
                             $("#result").html("<div class='alert alert-danger'>" +
                                     "<span class='glyphicon glyphicon-exclamation-sign'></span>" +
