@@ -95,7 +95,7 @@ class LWLM:
         input_file.close()
         Logger.log_success('Finished reading ' + in_file)
 
-        out_file = path.join('out', 'lwlm-alt-words-' + str(n) + 'grams.csv')
+        out_file = path.join('out', 'lwlm-alt-words-' + str(n) + '-grams.csv')
         Logger.log_message('Writing alternate words table to ' + out_file)
         output_file = open(out_file, 'w+')
 
