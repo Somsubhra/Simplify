@@ -24,7 +24,10 @@ class LWLM:
 
     # Get the LWLM alternate words for a given word
     def get(self, word):
-        return list(set(self.alt_words_table[word]))
+        if word in self.alt_words_table:
+            return list(set(self.alt_words_table[word]))
+        else:
+            return [word]
 
     # Build the LWLM tables
     @staticmethod
