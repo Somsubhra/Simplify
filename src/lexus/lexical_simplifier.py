@@ -29,16 +29,8 @@ class LexicalSimplifier:
             if sanitized_word == '':
                 continue
 
-            neighbors = []
-
-            if not(i < lwlm_n / 2 or i > length - 1 - lwlm_n / 2):
-                for j in range(1, lwlm_n / 2 + 1):
-                    neighbors.append(Sanitizer.sanitize_word(words[i - j]))
-                for j in range(1, lwlm_n / 2 + 1):
-                    neighbors.append(Sanitizer.sanitize_word(words[i + j]))
-
-            replacer = Replacer()
-            result = replacer.detailed_replacement(sanitized_word, neighbors)
+            replacer = Replacer(lwlm_n)
+            result = replacer.detailed_replacement(sanitized_word)
             results.append(result)
 
         return results

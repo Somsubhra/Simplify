@@ -44,7 +44,6 @@ def main():
     cleanup()
     LWLM.build_tables('corpus')
     Logger.log_success("Application exited successfully")
-    run_server()
 
 
 # Call the main method

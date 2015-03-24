@@ -11,12 +11,12 @@ from os import path
 class Replacer:
 
     # Constructor for the Replacer class
-    def __init__(self):
+    def __init__(self, lwlm_n):
         self.kf = KuceraFrancis(path.join('data', 'kucera_francis.csv'))
-        self.lwlm = LWLM(path.join('out', '3-gram-regexp.csv'))
+        self.lwlm = LWLM(path.join('out', 'lwlm-alt-words-' + str(lwlm_n) + '-grams.csv'))
 
     # Give a detailed analysis along with the replacement
-    def detailed_replacement(self, word, neighbors):
+    def detailed_replacement(self, word):
 
         replaced_word = ''
 
@@ -29,7 +29,7 @@ class Replacer:
             }
 
         wordnet_words = Synonyms.get(word)
-        lwlm_words = self.lwlm.get(word, neighbors)
+        lwlm_words = self.lwlm.get(word)
         intersection_words = list(set(wordnet_words) & set(lwlm_words))
 
         return {
