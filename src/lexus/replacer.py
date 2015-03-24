@@ -33,10 +33,15 @@ class Replacer:
         lwlm_words = self.lwlm.get(word)
         intersection_words = list(set(wordnet_words) & set(lwlm_words))
 
+        intersection_results = []
+
+        for intersection_word in intersection_words:
+            intersection_results.append(intersection_word + '(KFF=' + str(self.kf.frequency(intersection_word)) + ')')
+
         return {
             'word': word,
             'alt_word': self.kf.maximum(intersection_words),
             'wordnet': str(wordnet_words),
             'lwlm': str(lwlm_words),
-            'intersection': str(intersection_words)
+            'intersection': str(intersection_results)
         }
