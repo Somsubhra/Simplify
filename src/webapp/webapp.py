@@ -24,7 +24,8 @@ class WebApp:
         @self.app.route('/api/simplify')
         def simplify_api():
             text = request.args['text']
-            result = LexicalSimplifier.simplify(text, 5)
+            n = request.args['n']
+            result = LexicalSimplifier.simplify(text, n)
             return jsonify(success=True, result=result)
 
         Logger.log_success("Started application server successfully")
