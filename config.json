@@ -1,0 +1,4 @@
+{
+  "stanford_parser_jars_path": "/home/s7a/nltk_data/stanford-parser",
+  "stanford_parser_model_path": "edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz"
+}
