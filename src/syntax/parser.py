@@ -2,6 +2,8 @@ __author__ = 's7a'
 
 # All imports
 import json
+import os
+from nltk.parse import stanford
 
 
 # The Parser class
@@ -11,5 +13,11 @@ class Parser:
     def __init__(self):
         with open('config.json') as config_file:
             config = json.load(config_file)
-            self.jars_path = config["stanford_parser_jars"]
-            self.model_path = config["stanford_parser_model_path"]
+            os.environ['STANFORD_PARSER'] = str(config["stanford_parser_jars_path"])
+            os.environ['STANFORD_MODELS'] = str(config["stanford_parser_jars_path"])
+            self.parser = stanford.StanfordParser(model_path=str(config["stanford_parser_model_path"]))
+
+    # Parse a sentence
+    def parse(self, sentence):
+        parse_tree = self.parser.raw_parse(sentence)
+        return parse_tree
