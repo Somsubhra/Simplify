@@ -52,9 +52,9 @@
                         n: n
                     }, function(data) {
                         if(data.success) {
-                            var result = data.result;
+                            var lexicalResult = data.result.lexical;
                             var reconstruction = "";
-                            var l = result.length;
+                            var l = lexicalResult.length;
 
                             var html = '<table class="table table-bordered">' +
                                     '<tr>' +
@@ -66,7 +66,7 @@
                                     '</tr>';
 
                             for(var i = 0; i < l; i++) {
-                                var item = result[i];
+                                var item = lexicalResult[i];
                                 reconstruction += item.alt_word + " ";
                                 html += "<tr>" +
                                 "<td>" + item.word + "</td>" +

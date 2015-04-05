@@ -28,9 +28,16 @@ class WebApp:
         def simplify_api():
             text = request.args['text']
             n = request.args['n']
-            result = LexicalSimplifier.simplify(text, n)
+
+            lex_result = LexicalSimplifier.simplify(text, n)
             syn_result = self.syntactic_simplifier.simplify(text)
-            return jsonify(success=True, result=result, syn_result=syn_result)
+
+            result = {
+                "lexical": lex_result,
+                "syntactic": syn_result
+            }
+
+            return jsonify(success=True, result=result)
 
         Logger.log_success("Started application server successfully")
 
