@@ -1,14 +1,17 @@
 __author__ = 's7a'
 
+# All imports
+from parser import Parser
+
 
 # The Syntactic simplification class
 class SyntacticSimplifier:
 
     # Constructor for the Syntactic Simplifier
     def __init__(self):
-        # Unused
-        pass
+        self.parser = Parser()
 
-    @staticmethod
-    def simplify(content):
-        pass
+    # Simplify content
+    def simplify(self, content):
+        results = []
+        return results

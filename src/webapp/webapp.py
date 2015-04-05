@@ -4,6 +4,7 @@ __author__ = 's7a'
 from flask import Flask, render_template, request, jsonify
 from extras import Logger
 from lexus import LexicalSimplifier
+from syntax import SyntacticSimplifier
 
 
 # The Web Application class
@@ -17,6 +18,8 @@ class WebApp:
 
         self.app = Flask(__name__)
 
+        self.syntactic_simplifier = SyntacticSimplifier()
+
         @self.app.route('/')
         def index():
             return render_template('index.html')
@@ -26,7 +29,8 @@ class WebApp:
             text = request.args['text']
             n = request.args['n']
             result = LexicalSimplifier.simplify(text, n)
-            return jsonify(success=True, result=result)
+            syn_result = self.syntactic_simplifier.simplify(text)
+            return jsonify(success=True, result=result, syn_result=syn_result)
 
         Logger.log_success("Started application server successfully")
 
