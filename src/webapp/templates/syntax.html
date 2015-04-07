@@ -40,9 +40,6 @@
     <div class="row">
         <div class="col-md-12" id="result"></div>
     </div>
-    <div class="row">
-        <div class="col-md-12" id="syntactic-analysis"></div>
-    </div>
 </div>
 <script type="text/javascript" src="/static/jquery/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
@@ -55,11 +52,20 @@
                     {
                         text: txt
                     }, function(data) {
+                        var resEl = $("#result");
+
                         if(data.success) {
+                            resEl.html("");
+
                             var syntacticResult = data.result;
-                            console.log(syntacticResult);
+                            var l = syntacticResult.length;
+
+                            for(var i = 0; i < l; i++) {
+                                resEl.append('<div class="well">' + syntacticResult + '</div>');
+                            }
+
                         } else {
-                            $("#result").html("<div class='alert alert-danger'>" +
+                            resEl.html("<div class='alert alert-danger'>" +
                                     "<span class='glyphicon glyphicon-exclamation-sign'></span>" +
                                     " Some error occurred!</div>");
                         }

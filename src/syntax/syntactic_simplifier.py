@@ -13,6 +13,11 @@ class SyntacticSimplifier:
 
     # Simplify content
     def simplify(self, content, plot_tree=False):
-        self.parser.parse(content, plot_tree)
         results = []
+
+        parse_trees = self.parser.parse(content, plot_tree)
+
+        for parse_tree in parse_trees:
+            results.append(str(parse_tree))
+
         return results
