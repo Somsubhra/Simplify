@@ -24,6 +24,14 @@ class WebApp:
         def index():
             return render_template('index.html')
 
+        @self.app.route('/lexus')
+        def lexus():
+            return render_template('lexus.html')
+
+        @self.app.route('/syntax')
+        def syntax():
+            return render_template('syntax.html')
+
         @self.app.route('/api/simplify')
         def simplify_api():
             text = request.args['text']
@@ -37,6 +45,21 @@ class WebApp:
                 "syntactic": syn_result
             }
 
+            return jsonify(success=True, result=result)
+
+        @self.app.route('/api/lexus/simplify')
+        def lexus_simplify():
+            text = request.args['text']
+            n = request.args['n']
+
+            result = LexicalSimplifier.simplify(text, n)
+            return jsonify(success=True, result=result)
+
+        @self.app.route('/api/syntax/simplify')
+        def syntax_simplify():
+            text = request.args['text']
+
+            result = self.syntactic_simplifier.simplify(text)
             return jsonify(success=True, result=result)
 
         Logger.log_success("Started application server successfully")

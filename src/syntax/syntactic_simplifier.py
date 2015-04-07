@@ -12,6 +12,7 @@ class SyntacticSimplifier:
         self.parser = Parser()
 
     # Simplify content
-    def simplify(self, content):
+    def simplify(self, content, plot_tree=False):
+        self.parser.parse(content, plot_tree)
         results = []
         return results

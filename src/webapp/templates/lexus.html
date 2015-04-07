@@ -1,7 +1,7 @@
 <html>
 <head>
     <title>
-        Simplify
+        Lexical Simplify
     </title>
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css" />
 </head>
@@ -40,7 +40,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <button id="simplify-btn" class="btn btn-primary">Simplify Text</button>
+                <button id="simplify-btn" class="btn btn-primary">Lexically Simplify Text</button>
             </div>
         </div>
     </div>
@@ -59,13 +59,13 @@
             var txt = $("#txt-inp").val();
             var n = $("#lwlm-n").val();
 
-            $.getJSON('/api/simplify',
+            $.getJSON('/api/lexus/simplify',
                     {
                         text: txt,
                         n: n
                     }, function(data) {
                         if(data.success) {
-                            var lexicalResult = data.result.lexical;
+                            var lexicalResult = data.result;
                             var reconstruction = "";
                             var l = lexicalResult.length;
 

@@ -18,6 +18,11 @@ class Parser:
             self.parser = stanford.StanfordParser(model_path=str(config["stanford_parser_model_path"]))
 
     # Parse a sentence
-    def parse(self, sentence):
-        parse_tree = self.parser.raw_parse(sentence)
-        return parse_tree
+    def parse(self, sentence, plot_tree=False):
+        parse_trees = self.parser.raw_parse(sentence)
+
+        if plot_tree:
+            for parse_tree in parse_trees:
+                parse_tree.draw()
+
+        return parse_trees

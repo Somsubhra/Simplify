@@ -1,7 +1,7 @@
 <html>
 <head>
     <title>
-        Simplify
+        Syntactic Simplify
     </title>
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css" />
 </head>
@@ -33,13 +33,6 @@
                 <textarea id="txt-inp" class="form-control" placeholder="Enter the text you want to simplify here" rows="15"></textarea>
             </div>
             <div class="form-group">
-                <label for="lwlm-n">Select value of n for LWLM n-grams:</label>
-                <select id="lwlm-n" class="form-control">
-                    <option value="5">5</option>
-                    <option value="3">3</option>
-                </select>
-            </div>
-            <div class="form-group">
                 <button id="simplify-btn" class="btn btn-primary">Simplify Text</button>
             </div>
         </div>
@@ -48,7 +41,7 @@
         <div class="col-md-12" id="result"></div>
     </div>
     <div class="row">
-        <div class="col-md-12" id="lexical-analysis"></div>
+        <div class="col-md-12" id="syntactic-analysis"></div>
     </div>
 </div>
 <script type="text/javascript" src="/static/jquery/jquery-1.11.2.min.js"></script>
@@ -57,45 +50,14 @@
     $(document).ready(function() {
         $("#simplify-btn").click(function() {
             var txt = $("#txt-inp").val();
-            var n = $("#lwlm-n").val();
 
-            $.getJSON('/api/simplify',
+            $.getJSON('/api/syntax/simplify',
                     {
-                        text: txt,
-                        n: n
+                        text: txt
                     }, function(data) {
                         if(data.success) {
-                            var lexicalResult = data.result.lexical;
-                            var reconstruction = "";
-                            var l = lexicalResult.length;
-
-                            var html = '<table class="table table-bordered">' +
-                                    '<tr>' +
-                                    '<th>Word</th>' +
-                                    '<th>Wordnet Words</th>' +
-                                    '<th>LWLM words</th>' +
-                                    '<th>Intersection</th>' +
-                                    '<th>Replacement</th>' +
-                                    '</tr>';
-
-                            for(var i = 0; i < l; i++) {
-                                var item = lexicalResult[i];
-                                reconstruction += item.alt_word + " ";
-                                html += "<tr>" +
-                                "<td>" + item.word + "</td>" +
-                                "<td>" + item.wordnet + "</td>" +
-                                "<td>" + item.lwlm + "</td>" +
-                                "<td>" + item.intersection + "</td>" +
-                                "<td>" + item.alt_word + "</td>" +
-                                "</tr>";
-                            }
-
-                            html += '</table>';
-
-                            $("#result").html("<h3>Result</h3><div class='well'>" + reconstruction + "</div>");
-
-
-                            $("#lexical-analysis").html("<h3>Lexical Analysis</h3>" + html);
+                            var syntacticResult = data.result;
+                            console.log(syntacticResult);
                         } else {
                             $("#result").html("<div class='alert alert-danger'>" +
                                     "<span class='glyphicon glyphicon-exclamation-sign'></span>" +
