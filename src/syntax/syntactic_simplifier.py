@@ -2,6 +2,7 @@ __author__ = 's7a'
 
 # All imports
 from parser import Parser
+from breaker import Breaker
 
 
 # The Syntactic simplification class
@@ -18,6 +19,11 @@ class SyntacticSimplifier:
         parse_trees = self.parser.parse(content, plot_tree)
 
         for parse_tree in parse_trees:
-            results.append(str(parse_tree))
+            broken_string = Breaker.break_tree(parse_tree)
+
+            results.append({
+                "tree": str(parse_tree),
+                "broken_string": broken_string
+            })
 
         return results
