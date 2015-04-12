@@ -5,6 +5,7 @@ from flask import Flask, render_template, request, jsonify
 from extras import Logger
 from lexus import LexicalSimplifier
 from syntax import SyntacticSimplifier
+from enrich import Enricher
 
 
 # The Web Application class
@@ -19,6 +20,7 @@ class WebApp:
         self.app = Flask(__name__)
 
         self.syntactic_simplifier = SyntacticSimplifier()
+        self.enricher = Enricher()
 
         @self.app.route('/')
         def index():
@@ -54,7 +56,8 @@ class WebApp:
         @self.app.route('/api/enrich')
         def enrich_api():
             text = request.args['text']
-            return jsonify(success=True)
+            result = self.enricher.enrich(text)
+            return jsonify(success=True, result=result)
 
         @self.app.route('/api/lexus/simplify')
         def lexus_simplify_api():

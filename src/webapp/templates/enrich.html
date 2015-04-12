@@ -48,6 +48,21 @@
     $(document).ready(function() {
         $("#enrich-btn").click(function() {
             var txt = $("#txt-inp").val();
+
+            $.getJSON('/api/enrich',
+                    {
+                        text: txt
+                    }, function(data) {
+                        if(data.success) {
+                            var enrichedResult = data.result;
+
+                            $("#result").html("<h3>Result</h3><div class='well'>" + enrichedResult + "</div>");
+                        } else {
+                            $("#result").html("<div class='alert alert-danger'>" +
+                                    "<span class='glyphicon glyphicon-exclamation-sign'></span>" +
+                                    " Some error occurred!</div>");
+                        }
+                    }, "json");
         });
     });
 </script>
