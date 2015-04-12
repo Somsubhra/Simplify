@@ -13,6 +13,17 @@ class Enricher:
         self.kfe = KuceraFrancisEnricher()
 
     # Enrich the text
-    @staticmethod
-    def enrich(content):
-        return content
+    def enrich(self, content):
+        words = [str(word) for word in content.split()]
+
+        result = ""
+
+        for word in words:
+            sanitized_word = Sanitizer.sanitize_word(word)
+
+            if sanitized_word == '':
+                continue
+
+            result += self.kfe.enrich_word(sanitized_word) + " "
+
+        return result
