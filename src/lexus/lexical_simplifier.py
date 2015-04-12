@@ -18,15 +18,12 @@ class LexicalSimplifier:
     def simplify(content, lwlm_n):
         words = [str(word) for word in content.split()]
 
-        length = len(words)
-
         results = []
-
         replacer = Replacer(lwlm_n)
 
-        for i in range(length):
+        for word in words:
 
-            sanitized_word = Sanitizer.sanitize_word(words[i])
+            sanitized_word = Sanitizer.sanitize_word(word)
 
             if sanitized_word == '':
                 continue

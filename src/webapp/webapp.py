@@ -51,6 +51,11 @@ class WebApp:
 
             return jsonify(success=True, result=result)
 
+        @self.app.route('/api/enrich')
+        def enrich_api():
+            text = request.args['text']
+            return jsonify(success=True)
+
         @self.app.route('/api/lexus/simplify')
         def lexus_simplify_api():
             text = request.args['text']
