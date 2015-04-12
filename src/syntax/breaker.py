@@ -15,11 +15,17 @@ class Breaker:
 
         t = Tree.fromstring(str(tree))
 
-        try:
-            print t[0]
-        except Exception as x:
-            print x.message
+        print len(t)
+
+        Breaker.parse_tree(t)
 
         result_string = ""
 
         return result_string
+
+    @staticmethod
+    def parse_tree(tree):
+        if type(tree) == Tree:
+            print tree
+            for node in tree:
+                Breaker.parse_tree(node)
