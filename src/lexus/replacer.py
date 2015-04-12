@@ -1,10 +1,12 @@
 __author__ = 's7a'
 
 # All imports
-from lwlm import LWLM
-from kucera_francis import KuceraFrancis
-from synonyms import Synonyms
 from os import path
+
+from lwlm import LWLM
+from extras import KuceraFrancis
+from synonyms import Synonyms
+
 
 
 # The Replacer class
