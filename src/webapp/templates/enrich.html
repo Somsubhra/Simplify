@@ -1,7 +1,7 @@
 <html>
 <head>
     <title>
-        Syntactic Simplify
+        Simplify
     </title>
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css" />
 </head>
@@ -34,7 +34,7 @@
                 <textarea id="txt-inp" class="form-control" placeholder="Enter the text you want to simplify here" rows="15"></textarea>
             </div>
             <div class="form-group">
-                <button id="simplify-btn" class="btn btn-primary">Simplify Text</button>
+                <button id="enrich-btn" class="btn btn-primary">Enrich Text</button>
             </div>
         </div>
     </div>
@@ -46,31 +46,8 @@
 <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
 <script>
     $(document).ready(function() {
-        $("#simplify-btn").click(function() {
+        $("#enrich-btn").click(function() {
             var txt = $("#txt-inp").val();
-
-            $.getJSON('/api/syntax/simplify',
-                    {
-                        text: txt
-                    }, function(data) {
-                        var resEl = $("#result");
-
-                        if(data.success) {
-                            resEl.html("");
-
-                            var syntacticResult = data.result;
-                            var l = syntacticResult.length;
-
-                            for(var i = 0; i < l; i++) {
-                                resEl.append('<div class="well">' + syntacticResult[i].tree + '</div>');
-                            }
-
-                        } else {
-                            resEl.html("<div class='alert alert-danger'>" +
-                                    "<span class='glyphicon glyphicon-exclamation-sign'></span>" +
-                                    " Some error occurred!</div>");
-                        }
-                    }, "json");
         });
     });
 </script>

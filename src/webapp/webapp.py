@@ -24,6 +24,10 @@ class WebApp:
         def index():
             return render_template('index.html')
 
+        @self.app.route('/enrich')
+        def enrich():
+            return render_template('enrich.html')
+
         @self.app.route('/lexus')
         def lexus():
             return render_template('lexus.html')
@@ -48,7 +52,7 @@ class WebApp:
             return jsonify(success=True, result=result)
 
         @self.app.route('/api/lexus/simplify')
-        def lexus_simplify():
+        def lexus_simplify_api():
             text = request.args['text']
             n = request.args['n']
 
@@ -56,7 +60,7 @@ class WebApp:
             return jsonify(success=True, result=result)
 
         @self.app.route('/api/syntax/simplify')
-        def syntax_simplify():
+        def syntax_simplify_api():
             text = request.args['text']
 
             result = self.syntactic_simplifier.simplify(text, True)
