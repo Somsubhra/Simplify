@@ -15,7 +15,10 @@ class InfixCoordination:
     def break_tree(self, tree):
         t = Tree.fromstring(str(tree))
 
+        self.has_infix_coordination = False
         self.parse_tree(t)
+
+        print "Infix Coordination: " + str(self.has_infix_coordination)
 
         result_string = ""
         return result_string

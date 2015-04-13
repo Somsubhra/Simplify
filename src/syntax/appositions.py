@@ -18,7 +18,7 @@ class Appositions:
         self.has_apposition = False
         self.parse_tree(t)
 
-        print self.has_apposition
+        print "Apposition: " + str(self.has_apposition)
 
         result_string = ""
         return result_string

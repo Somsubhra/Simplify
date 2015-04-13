@@ -15,13 +15,23 @@ class PrefixSubordination:
     def break_tree(self, tree):
         t = Tree.fromstring(str(tree))
 
+        self.has_prefix_subordination = False
         self.parse_tree(t)
+
+        print "Prefix Subordination: " + str(self.has_prefix_subordination)
 
         result_string = ""
         return result_string
 
     # Parse the tree
     def parse_tree(self, tree):
+
         if type(tree) == Tree:
+
+            if tree.label() == "SBAR":
+                for node in tree:
+                    if type(node) == Tree:
+                        self.has_prefix_subordination |= node.label() == "IN"
+
             for node in tree:
                 self.parse_tree(node)

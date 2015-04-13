@@ -18,7 +18,7 @@ class RelativeClauses:
         self.has_wh_word = False
         self.parse_tree(t)
 
-        print self.has_wh_word
+        print "Relative Clause: " + str(self.has_wh_word)
 
         result_string = ""
         return result_string

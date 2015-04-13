@@ -15,7 +15,10 @@ class InfixSubordination:
     def break_tree(self, tree):
         t = Tree.fromstring(str(tree))
 
+        self.has_infix_subordination = False
         self.parse_tree(t)
+
+        print "Infix Subordination: " + str(self.has_infix_subordination)
 
         result_string = ""
         return result_string
