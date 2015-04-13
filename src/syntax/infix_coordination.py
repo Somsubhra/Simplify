@@ -25,6 +25,10 @@ class InfixCoordination:
 
     # Parse the tree
     def parse_tree(self, tree):
+
         if type(tree) == Tree:
+
+            self.has_infix_coordination |= tree.label() == "CC"
+
             for node in tree:
                 self.parse_tree(node)
