@@ -10,18 +10,20 @@ class Subordination:
     # Constructor for Prefix Subordination
     def __init__(self):
         self.has_subordination = False
+        self.result_string = ""
 
     # Break the tree
     def break_tree(self, tree):
         t = Tree.fromstring(str(tree))
 
         self.has_subordination = False
+        self.result_string = ""
+
         self.parse_tree(t)
 
         print "Subordination: " + str(self.has_subordination)
 
-        result_string = ""
-        return result_string
+        return self.result_string
 
     # Parse the tree
     def parse_tree(self, tree):

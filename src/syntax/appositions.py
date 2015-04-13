@@ -10,18 +10,20 @@ class Appositions:
     # Constructor for the Appositions class
     def __init__(self):
         self.has_apposition = False
+        self.result_string = ""
 
     # Break the tree
     def break_tree(self, tree):
         t = Tree.fromstring(str(tree))
 
         self.has_apposition = False
+        self.result_string = ""
+
         self.parse_tree(t)
 
         print "Apposition: " + str(self.has_apposition)
 
-        result_string = ""
-        return result_string
+        return self.result_string
 
     # Parse the tree
     def parse_tree(self, tree):
