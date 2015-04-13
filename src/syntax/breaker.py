@@ -12,14 +12,14 @@ class Breaker:
 
     # Constructor for the breaker class
     def __init__(self):
-        self.appostions = Appositions()
+        self.appositions = Appositions()
         self.relative_clauses = RelativeClauses()
         self.subordination = Subordination()
         self.infix_coordination = InfixCoordination()
 
     # Break the tree
     def break_tree(self, tree):
-        self.appostions.break_tree(tree)
+        self.appositions.break_tree(tree)
         self.relative_clauses.break_tree(tree)
         self.subordination.break_tree(tree)
         self.infix_coordination.break_tree(tree)
