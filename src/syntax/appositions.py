@@ -15,6 +15,7 @@ class Appositions:
     def break_tree(self, tree):
         t = Tree.fromstring(str(tree))
 
+        self.has_apposition = False
         self.parse_tree(t)
 
         print self.has_apposition
