@@ -4,21 +4,21 @@ __author__ = 's7a'
 from nltk.tree import Tree
 
 
-# The Prefix Subordination class
-class PrefixSubordination:
+# The Subordination class
+class Subordination:
 
     # Constructor for Prefix Subordination
     def __init__(self):
-        self.has_prefix_subordination = False
+        self.has_subordination = False
 
     # Break the tree
     def break_tree(self, tree):
         t = Tree.fromstring(str(tree))
 
-        self.has_prefix_subordination = False
+        self.has_subordination = False
         self.parse_tree(t)
 
-        print "Prefix Subordination: " + str(self.has_prefix_subordination)
+        print "Subordination: " + str(self.has_subordination)
 
         result_string = ""
         return result_string
@@ -31,7 +31,7 @@ class PrefixSubordination:
             if tree.label() == "SBAR":
                 for node in tree:
                     if type(node) == Tree:
-                        self.has_prefix_subordination |= node.label() == "IN"
+                        self.has_subordination |= node.label() == "IN"
 
             for node in tree:
                 self.parse_tree(node)

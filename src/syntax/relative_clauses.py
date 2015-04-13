@@ -25,7 +25,7 @@ class RelativeClauses:
 
     # Parse the tree
     def parse_tree(self, tree):
-        
+
         if type(tree) == Tree:
             if tree.label() == "SBAR":
                 for node in tree:
