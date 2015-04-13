@@ -11,6 +11,7 @@ class SyntacticSimplifier:
     # Constructor for the Syntactic Simplifier
     def __init__(self):
         self.parser = Parser()
+        self.breaker = Breaker()
 
     # Simplify content
     def simplify(self, content, plot_tree=False):
@@ -19,7 +20,7 @@ class SyntacticSimplifier:
         parse_trees = self.parser.parse(content, plot_tree)
 
         for parse_tree in parse_trees:
-            broken_string = Breaker.break_tree(parse_tree)
+            broken_string = self.breaker.break_tree(parse_tree)
 
             results.append({
                 "tree": str(parse_tree),
