@@ -25,7 +25,12 @@ class RelativeClauses:
 
     # Parse the tree
     def parse_tree(self, tree):
+        
         if type(tree) == Tree:
-            self.has_wh_word |= tree.label() == "WHNP"
+            if tree.label() == "SBAR":
+                for node in tree:
+                    if type(node) == Tree:
+                        self.has_wh_word |= node.label() == "WHNP"
+
             for node in tree:
                 self.parse_tree(node)
