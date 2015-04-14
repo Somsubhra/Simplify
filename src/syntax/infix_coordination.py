@@ -10,13 +10,11 @@ class InfixCoordination:
     # Constructor for the infix coordination
     def __init__(self):
         self.has_infix_coordination = False
-        self.slice_point = -1
         self.subtree_list = []
 
     # Break the tree
     def break_tree(self, tree):
         self.has_infix_coordination = False
-        self.slice_point = -1
         self.subtree_list = []
 
         self.parse_tree(tree)
@@ -24,8 +22,7 @@ class InfixCoordination:
         print "Infix Coordination: " + str(self.has_infix_coordination)
 
         if self.has_infix_coordination:
-            result_string = ' '.join(self.subtree_list[:self.slice_point-1]) +\
-                            '. ' + ' '.join(self.subtree_list[self.slice_point:])
+            result_string = ' '.join(self.subtree_list)
         else:
             result_string = ' '.join(tree.leaves())
 
@@ -39,15 +36,12 @@ class InfixCoordination:
             sentence_root = tree[0]
             if type(sentence_root) == Tree:
                 if sentence_root.label() == "S":
-                    counter = 0
                     for node in sentence_root:
-                        counter += 1
-
                         if type(node) == Tree:
-                            self.subtree_list.append(' '.join(node.leaves()))
-
                             if node.label() == "CC":
                                 self.has_infix_coordination |= True
-                                self.slice_point = counter
+                                self.subtree_list.append('.')
+                            else:
+                                self.subtree_list.append(' '.join(node.leaves()))
                         else:
                             self.subtree_list.append(node)
