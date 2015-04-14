@@ -10,27 +10,21 @@ class InfixCoordination:
     # Constructor for the infix coordination
     def __init__(self):
         self.has_infix_coordination = False
-        self.result_string = ""
 
     # Break the tree
     def break_tree(self, tree):
-        t = Tree.fromstring(str(tree))
-
         self.has_infix_coordination = False
-        self.result_string = ""
-
-        self.parse_tree(t)
-
+        self.parse_tree(tree)
         print "Infix Coordination: " + str(self.has_infix_coordination)
-
-        return self.result_string
 
     # Parse the tree
     def parse_tree(self, tree):
-
         if type(tree) == Tree:
-
-            self.has_infix_coordination |= tree.label() == "CC"
-
-            for node in tree:
-                self.parse_tree(node)
+            sentence_root = tree[0]
+            if type(sentence_root) == Tree:
+                if sentence_root.label() == "S":
+                    print "Valid Tree"
+                    for node in sentence_root:
+                        if type(node) == Tree:
+                            if node.label() == "CC":
+                                self.has_infix_coordination |= True
