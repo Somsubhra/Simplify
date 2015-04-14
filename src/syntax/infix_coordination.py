@@ -25,11 +25,15 @@ class InfixCoordination:
         print self.slice_point
         print self.subtree_list
 
-        result_string = ' '.join(self.subtree_list[:self.slice_point-1]) +\
-                        '. ' + ' '.join(self.subtree_list[self.slice_point:])
+        if self.has_infix_coordination:
+
+            result_string = ' '.join(self.subtree_list[:self.slice_point-1]) +\
+                            '. ' + ' '.join(self.subtree_list[self.slice_point:])
+        else:
+            result_string = ' '.join(tree.leaves())
 
         print result_string
-        
+
         return result_string
 
     # Parse the tree
