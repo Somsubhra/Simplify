@@ -23,6 +23,6 @@ class Breaker:
     def break_tree(self, tree):
         # self.appositions.break_tree(tree)
         # self.relative_clauses.break_tree(tree)
-        # self.prefix_subordination.break_tree(tree)
+        self.prefix_subordination.break_tree(tree)
         self.infix_subordination.break_tree(tree)
         self.infix_coordination.break_tree(tree)
