@@ -22,17 +22,14 @@ class InfixCoordination:
         self.parse_tree(tree)
 
         print "Infix Coordination: " + str(self.has_infix_coordination)
-        print self.slice_point
-        print self.subtree_list
 
         if self.has_infix_coordination:
-
             result_string = ' '.join(self.subtree_list[:self.slice_point-1]) +\
                             '. ' + ' '.join(self.subtree_list[self.slice_point:])
         else:
             result_string = ' '.join(tree.leaves())
 
-        print result_string
+        print "Infix Coordination Result: " + result_string
 
         return result_string
 
@@ -42,12 +39,9 @@ class InfixCoordination:
             sentence_root = tree[0]
             if type(sentence_root) == Tree:
                 if sentence_root.label() == "S":
-                    print "Valid Tree"
-
                     counter = 0
                     for node in sentence_root:
                         counter += 1
-
                         self.subtree_list.append(' '.join(node.leaves()))
 
                         if type(node) == Tree:
