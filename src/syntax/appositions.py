@@ -17,6 +17,8 @@ class Appositions:
     def break_tree(self, tree):
         try:
             self.has_apposition = False
+            self.np_subtrees = []
+            self.other_subtrees = []
 
             self.parse_tree(tree)
 

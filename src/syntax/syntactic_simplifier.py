@@ -3,6 +3,7 @@ __author__ = 's7a'
 # All imports
 from parser import Parser
 from breaker import Breaker
+import re
 
 
 # The Syntactic simplification class
@@ -17,14 +18,17 @@ class SyntacticSimplifier:
     def simplify(self, content, plot_tree=False):
         results = []
 
-        parse_trees = self.parser.parse(content, plot_tree)
+        sentences = re.split('\.|!|\?', content)
 
-        for parse_tree in parse_trees:
-            broken_string = self.breaker.break_tree(parse_tree)
+        for sentence in sentences:
+            parse_trees = self.parser.parse(sentence, plot_tree)
 
-            results.append({
-                "tree": str(parse_tree),
-                "broken_string": broken_string
-            })
+            for parse_tree in parse_trees:
+                broken_string = self.breaker.break_tree(parse_tree)
+
+                results.append({
+                    "tree": str(parse_tree),
+                    "broken_string": broken_string
+                })
 
         return results
