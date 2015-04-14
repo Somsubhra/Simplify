@@ -10,33 +10,59 @@ class Appositions:
     # Constructor for the Appositions class
     def __init__(self):
         self.has_apposition = False
-        self.result_string = ""
+        self.np_subtrees = []
+        self.other_subtrees = []
 
     # Break the tree
     def break_tree(self, tree):
-        t = Tree.fromstring(str(tree))
-
         self.has_apposition = False
-        self.result_string = ""
 
-        self.parse_tree(t)
+        self.parse_tree(tree)
 
         print "Apposition: " + str(self.has_apposition)
 
-        return self.result_string
+        if self.has_apposition:
+            result_string = self.np_subtrees[0] + " is " + " ".join(self.np_subtrees[1:]) + "."
+            result_string += (self.np_subtrees[0] + " ".join(self.other_subtrees)).replace(",", "")
+        else:
+            result_string = " ".join(tree.leaves())
+
+        print "Apposition Result: " + result_string
+
+        return result_string
 
     # Parse the tree
     def parse_tree(self, tree):
         if type(tree) == Tree:
+            sentence_root = tree[0]
+            if type(sentence_root) == Tree:
+                if sentence_root.label() == "S":
+                    first_node = sentence_root[0]
+                    if type(first_node) == Tree:
+                        if first_node.label() == "NP":
+                            for node in first_node:
+                                if type(node) == Tree:
+                                    if node.label() == "NP":
+                                        self.np_subtrees.append(' '.join(node.leaves()))
+                                    else:
+                                        self.other_subtrees.append(' '.join(node.leaves()))
+                                else:
+                                    self.other_subtrees.append(node)
+                        else:
+                            self.other_subtrees.append(' '.join(first_node.leaves()))
+                    else:
+                        self.other_subtrees.append(first_node)
 
-            np_label = 0
+                    flag = 0
 
-            for node in tree:
-                if type(node) == Tree:
-                    if node.label() == "NP":
-                        np_label += 1
+                    for node in sentence_root:
+                        if flag == 0:
+                            flag = 1
+                            continue
 
-            self.has_apposition |= np_label > 1
+                        if type(node) == Tree:
+                            self.other_subtrees.append(' '.join(node.leaves()))
+                        else:
+                            self.other_subtrees.append(node)
 
-            for node in tree:
-                self.parse_tree(node)
+        self.has_apposition |= len(self.np_subtrees) > 1
