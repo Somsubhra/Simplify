@@ -21,8 +21,16 @@ class Breaker:
 
     # Break the tree
     def break_tree(self, tree):
-        self.appositions.break_tree(tree)
-        self.relative_clauses.break_tree(tree)
-        self.prefix_subordination.break_tree(tree)
-        self.infix_subordination.break_tree(tree)
-        self.infix_coordination.break_tree(tree)
+        apposition_result = self.appositions.break_tree(tree)
+        relative_clause_result = self.relative_clauses.break_tree(tree)
+        prefix_subordination_result = self.prefix_subordination.break_tree(tree)
+        infix_subordination_result = self.infix_subordination.break_tree(tree)
+        infix_coordination_result = self.infix_coordination.break_tree(tree)
+
+        return {
+            "apposition": apposition_result,
+            "relative_clause": relative_clause_result,
+            'prefix_subordination': prefix_subordination_result,
+            "infix_subordination": infix_subordination_result,
+            "infix_coordination": infix_coordination_result
+        }
