@@ -16,25 +16,28 @@ class RelativeClauses:
 
     # Break the tree
     def break_tree(self, tree):
-        self.has_wh_word = False
-        self.np_subtrees = []
-        self.wh_subtrees = []
-        self.other_subtrees = []
+        try:
+            self.has_wh_word = False
+            self.np_subtrees = []
+            self.wh_subtrees = []
+            self.other_subtrees = []
 
-        self.parse_tree(tree)
+            self.parse_tree(tree)
 
-        print "Relative Clause: " + str(self.has_wh_word)
+            print "Relative Clause: " + str(self.has_wh_word)
 
-        if self.has_wh_word:
-            wh_part = " ".join(" ".join(self.wh_subtrees).split()[1:])
-            result_string = " ".join(self.np_subtrees) + " " + wh_part + "."
-            result_string += (" ".join(self.np_subtrees) + " ".join(self.other_subtrees)).replace(",", "")
-        else:
-            result_string = " ".join(tree.leaves())
+            if self.has_wh_word:
+                wh_part = " ".join(" ".join(self.wh_subtrees).split()[1:])
+                result_string = " ".join(self.np_subtrees) + " " + wh_part + "."
+                result_string += (" ".join(self.np_subtrees) + " ".join(self.other_subtrees)).replace(",", "")
+            else:
+                result_string = " ".join(tree.leaves())
 
-        print "Relative Clause Result: " + result_string
+            print "Relative Clause Result: " + result_string
 
-        return result_string
+            return result_string
+        except:
+            return " ".join(tree.leaves())
 
     # Parse the tree
     def parse_tree(self, tree):

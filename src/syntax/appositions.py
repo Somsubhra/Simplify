@@ -15,21 +15,25 @@ class Appositions:
 
     # Break the tree
     def break_tree(self, tree):
-        self.has_apposition = False
+        try:
+            self.has_apposition = False
 
-        self.parse_tree(tree)
+            self.parse_tree(tree)
 
-        print "Apposition: " + str(self.has_apposition)
+            print "Apposition: " + str(self.has_apposition)
 
-        if self.has_apposition:
-            result_string = self.np_subtrees[0] + " is " + " ".join(self.np_subtrees[1:]) + "."
-            result_string += (self.np_subtrees[0] + " ".join(self.other_subtrees)).replace(",", "")
-        else:
-            result_string = " ".join(tree.leaves())
+            if self.has_apposition:
+                result_string = self.np_subtrees[0] + " is " + " ".join(self.np_subtrees[1:]) + "."
+                result_string += (self.np_subtrees[0] + " ".join(self.other_subtrees)).replace(",", "")
+            else:
+                result_string = " ".join(tree.leaves())
 
-        print "Apposition Result: " + result_string
+            print "Apposition Result: " + result_string
 
-        return result_string
+            return result_string
+
+        except:
+            return " ".join(tree.leaves())
 
     # Parse the tree
     def parse_tree(self, tree):

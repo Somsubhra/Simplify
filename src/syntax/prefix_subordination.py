@@ -14,21 +14,25 @@ class PrefixSubordination:
 
     # Break the tree
     def break_tree(self, tree):
-        self.has_prefix_subordination = False
-        self.subtree_list = []
+        try:
+            self.has_prefix_subordination = False
+            self.subtree_list = []
 
-        self.parse_tree(tree)
+            self.parse_tree(tree)
 
-        print "Prefix Subordination: " + str(self.has_prefix_subordination)
+            print "Prefix Subordination: " + str(self.has_prefix_subordination)
 
-        if self.has_prefix_subordination:
-            result_string = " ".join(self.subtree_list)
-            result_string = result_string.replace(',', '', 1)
-        else:
-            result_string = " ".join(tree.leaves())
+            if self.has_prefix_subordination:
+                result_string = " ".join(self.subtree_list)
+                result_string = result_string.replace(',', '', 1)
+            else:
+                result_string = " ".join(tree.leaves())
 
-        print "Prefix Subordination Results: " + result_string
-        return result_string
+            print "Prefix Subordination Results: " + result_string
+            return result_string
+
+        except:
+            return " ".join(tree.leaves())
 
     # Parse the tree
     def parse_tree(self, tree):

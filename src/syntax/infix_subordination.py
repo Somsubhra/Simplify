@@ -14,21 +14,25 @@ class InfixSubordination:
 
     # Break the tree
     def break_tree(self, tree):
-        self.has_infix_subordination = False
-        self.subtree_list = []
+        try:
+            self.has_infix_subordination = False
+            self.subtree_list = []
 
-        self.parse_tree(tree)
+            self.parse_tree(tree)
 
-        print "Infix Subordination: " + str(self.has_infix_subordination)
+            print "Infix Subordination: " + str(self.has_infix_subordination)
 
-        if self.has_infix_subordination:
-            result_string = ' '.join(self.subtree_list)
-        else:
-            result_string = ' '.join(tree.leaves())
+            if self.has_infix_subordination:
+                result_string = ' '.join(self.subtree_list)
+            else:
+                result_string = ' '.join(tree.leaves())
 
-        print "Infix Subordination Result: " + result_string
+            print "Infix Subordination Result: " + result_string
 
-        return result_string
+            return result_string
+
+        except:
+            return " ".join(tree.leaves())
 
     # Parse the tree
     def parse_tree(self, tree):

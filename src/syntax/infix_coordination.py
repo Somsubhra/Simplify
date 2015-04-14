@@ -14,21 +14,25 @@ class InfixCoordination:
 
     # Break the tree
     def break_tree(self, tree):
-        self.has_infix_coordination = False
-        self.subtree_list = []
+        try:
+            self.has_infix_coordination = False
+            self.subtree_list = []
 
-        self.parse_tree(tree)
+            self.parse_tree(tree)
 
-        print "Infix Coordination: " + str(self.has_infix_coordination)
+            print "Infix Coordination: " + str(self.has_infix_coordination)
 
-        if self.has_infix_coordination:
-            result_string = ' '.join(self.subtree_list)
-        else:
-            result_string = ' '.join(tree.leaves())
+            if self.has_infix_coordination:
+                result_string = ' '.join(self.subtree_list)
+            else:
+                result_string = ' '.join(tree.leaves())
 
-        print "Infix Coordination Result: " + result_string
+            print "Infix Coordination Result: " + result_string
 
-        return result_string
+            return result_string
+
+        except:
+            return " ".join(tree.leaves())
 
     # Parse the tree
     def parse_tree(self, tree):
