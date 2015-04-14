@@ -21,6 +21,12 @@ class SyntacticSimplifier:
         sentences = re.split('\.|!|\?', content)
 
         for sentence in sentences:
+
+            sentence += "."
+
+            if sentence == ".":
+                continue
+
             parse_trees = self.parser.parse(sentence, plot_tree)
 
             for parse_tree in parse_trees:
