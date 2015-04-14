@@ -4,10 +4,10 @@ __author__ = 's7a'
 from nltk.tree import Tree
 
 
-# The Subordination class
-class Subordination:
+# The Infix Subordination class
+class InfixSubordination:
 
-    # Constructor for Prefix Subordination
+    # Constructor for Infix Subordination
     def __init__(self):
         self.has_subordination = False
         self.result_string = ""
@@ -21,7 +21,7 @@ class Subordination:
 
         self.parse_tree(t)
 
-        print "Subordination: " + str(self.has_subordination)
+        print "Infix Subordination: " + str(self.has_subordination)
 
         return self.result_string
 
