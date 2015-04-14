@@ -42,9 +42,12 @@ class InfixCoordination:
                     counter = 0
                     for node in sentence_root:
                         counter += 1
-                        self.subtree_list.append(' '.join(node.leaves()))
 
                         if type(node) == Tree:
+                            self.subtree_list.append(' '.join(node.leaves()))
+
                             if node.label() == "CC":
                                 self.has_infix_coordination |= True
                                 self.slice_point = counter
+                        else:
+                            self.subtree_list.append(node)
