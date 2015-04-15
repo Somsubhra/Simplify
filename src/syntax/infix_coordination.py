@@ -42,7 +42,7 @@ class InfixCoordination:
                     counter += 1
                     result_string += ' '.join(self.np_subtree_list) + " " + vp
                     if counter != l:
-                        result_string += "."
+                        result_string += ". "
 
                 result_string += ' '.join(self.other_subtree_list)
             else:
