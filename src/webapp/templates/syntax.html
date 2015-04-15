@@ -39,6 +39,9 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-md-12" id="break-results"></div>
+    </div>
+    <div class="row">
         <div class="col-md-12" id="tree-result"></div>
     </div>
 </div>
@@ -67,7 +70,7 @@
                                 treeRes += "<tr><td>" + syntacticResult[i].tree + "</td></tr>";
                             }
 
-                            treeResEl.append("<h1>Trees</h1><table class='table'>" + treeRes + "</table>");
+                            treeResEl.append("<h1>Trees</h1><table class='table table-bordered'>" + treeRes + "</table>");
 
                         } else {
                             treeResEl.html("<div class='alert alert-danger'>" +
