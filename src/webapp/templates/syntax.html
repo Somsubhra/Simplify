@@ -39,7 +39,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12" id="break-results"></div>
+        <div class="col-md-12" id="break-result"></div>
     </div>
     <div class="row">
         <div class="col-md-12" id="tree-result"></div>
@@ -57,21 +57,34 @@
                         text: txt
                     }, function(data) {
                         var treeResEl = $("#tree-result");
+                        var breakResEl = $("#break-result");
 
                         if(data.success) {
                             treeResEl.html("");
+                            breakResEl.html("");
 
                             var syntacticResult = data.result;
                             var l = syntacticResult.length;
 
                             var treeRes = "";
+                            var breakRes = ""
 
                             for(var i = 0; i < l; i++) {
                                 treeRes += "<tr><td>" + syntacticResult[i].tree + "</td></tr>";
+                                var brokenRes = syntacticResult[i].broken_string;
+
+                                breakRes += "<table class='table table-bordered'>";
+                                breakRes += "<tr><th>Original</th><th>" + brokenRes.original + "</th></tr>";
+                                breakRes += "<tr><td>Apposition</td><td>" + brokenRes.apposition + "</td></tr>";
+                                breakRes += "<tr><td>Relative Clause</td><td>" + brokenRes.relative_clause + "</td></tr>";
+                                breakRes += "<tr><td>Prefix Subordination</td><td>" + brokenRes.prefix_subordination + "</td></tr>";
+                                breakRes += "<tr><td>Infix Coordination</td><td>" + brokenRes.infix_coordination + "</td></tr>";
+                                breakRes += "<tr><td>Infix Subordination</td><td>" + brokenRes.infix_subordination + "</td></tr>";
+                                breakRes += "</table>"
                             }
 
                             treeResEl.append("<h1>Trees</h1><table class='table table-bordered'>" + treeRes + "</table>");
-
+                            breakResEl.append("<h1>Decompositions</h1>" + breakRes);
                         } else {
                             treeResEl.html("<div class='alert alert-danger'>" +
                                     "<span class='glyphicon glyphicon-exclamation-sign'></span>" +

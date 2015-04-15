@@ -28,6 +28,7 @@ class Breaker:
         infix_coordination_result = self.infix_coordination.break_tree(tree)
 
         return {
+            "original": ' '.join(tree.leaves()),
             "apposition": apposition_result,
             "relative_clause": relative_clause_result,
             'prefix_subordination': prefix_subordination_result,
