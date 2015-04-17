@@ -1,7 +1,7 @@
 __author__ = 's7a'
 
 # All imports
-from extras import KuceraFrancis
+from extras import StemmedKuceraFrancis
 from resource import Resource
 from os import path
 
@@ -11,7 +11,7 @@ class KuceraFrancisEnricher:
 
     # Constructor for the Kucera Francis Enricher
     def __init__(self):
-        self.kf = KuceraFrancis(path.join('data', 'kucera_francis.csv'))
+        self.kf = StemmedKuceraFrancis(path.join('data', 'kucera_francis.csv'))
 
     # Enrich the word
     def enrich_word(self, word):
