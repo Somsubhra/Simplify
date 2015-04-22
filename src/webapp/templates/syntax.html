@@ -39,6 +39,9 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-md-12" id="final-result"></div>
+    </div>
+    <div class="row">
         <div class="col-md-12" id="break-result"></div>
     </div>
     <div class="row">
@@ -56,6 +59,7 @@
                     {
                         text: txt
                     }, function(data) {
+                        var finalResEl = $("#final-result");
                         var treeResEl = $("#tree-result");
                         var breakResEl = $("#break-result");
 
@@ -67,7 +71,8 @@
                             var l = syntacticResult.length;
 
                             var treeRes = "";
-                            var breakRes = ""
+                            var breakRes = "";
+                            var finalRes = "";
 
                             for(var i = 0; i < l; i++) {
                                 treeRes += "<tr><td>" + syntacticResult[i].tree + "</td></tr>";
@@ -81,10 +86,13 @@
                                 breakRes += "<tr><td>Infix Coordination</td><td>" + brokenRes.infix_coordination + "</td></tr>";
                                 breakRes += "<tr><td>Infix Subordination</td><td>" + brokenRes.infix_subordination + "</td></tr>";
                                 breakRes += "</table>"
+
+                                finalRes += brokenRes.final;
                             }
 
                             treeResEl.append("<h1>Trees</h1><table class='table table-bordered'>" + treeRes + "</table>");
                             breakResEl.append("<h1>Decompositions</h1>" + breakRes);
+                            finalResEl.append("<div class='well'><h1>Result</h1>" + finalRes + "</div>");
                         } else {
                             treeResEl.html("<div class='alert alert-danger'>" +
                                     "<span class='glyphicon glyphicon-exclamation-sign'></span>" +
