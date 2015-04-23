@@ -1,0 +1,73 @@
+<html>
+<head>
+    <title>
+        Readability
+    </title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css" />
+</head>
+<body>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-nav">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-tags"></span>&nbsp&nbspSimplify</a>
+        </div>
+        <div class="collapse navbar-collapse" id="top-nav">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/">Home</a></li>
+                <li><a href="/lexus">Lexus</a></li>
+                <li><a href="/syntax">Syntax</a></li>
+                <li><a href="/enrich">Enrich</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <textarea id="txt-inp" class="form-control" placeholder="Enter text here to calculate readability" rows="15"></textarea>
+            </div>
+            <div class="form-group">
+                <button id="readability-btn" class="btn btn-primary">Calculate Readability</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" id="result"></div>
+    </div>
+</div>
+<script type="text/javascript" src="/static/jquery/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#readability-btn").click(function() {
+            var txt = $("#txt-inp").val();
+
+            $.getJSON('/api/readability',
+                    {
+                        text: txt
+                    }, function(data) {
+                        var resultEl = $("#result");
+                        resultEl.html("");
+                        
+                        if(data.success) {
+                            var readabilityRes = data.result;
+                            var resHtml = "Flesch Kincaid Grade Level: " + readabilityRes["flesch_kincaid_grade_level"];
+                            resultEl.append("<div class='well'><h1>Readability Results</h1>" + resHtml + "</div>");
+                        } else {
+                            resultEl.append("<div class='alert alert-danger'>" +
+                                    "<span class='glyphicon glyphicon-exclamation-sign'></span>" +
+                                    " Some error occurred!</div>");
+                        }
+                    }, "json");
+        });
+    });
+</script>
+</body>
+</html>

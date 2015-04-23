@@ -3,6 +3,7 @@ __author__ = 's7a'
 # All imports
 from flask import Flask, render_template, request, jsonify
 from extras import Logger
+from extras import FleschKincaid
 from lexus import LexicalSimplifier
 from syntax import SyntacticSimplifier
 from enrich import Enricher
@@ -38,6 +39,10 @@ class WebApp:
         def syntax():
             return render_template('syntax.html')
 
+        @self.app.route('/readability')
+        def readability():
+            return render_template('readability.html')
+
         @self.app.route('/api/simplify')
         def simplify_api():
             text = request.args['text']
@@ -72,6 +77,14 @@ class WebApp:
         def enrich_api():
             text = request.args['text']
             result = self.enricher.enrich(text)
+            return jsonify(success=True, result=result)
+
+        @self.app.route('/api/readability')
+        def readability_api():
+            text = request.args['text']
+            result = {
+                "flesch_kincaid_grade_level": FleschKincaid.calculate_grade_level(text)
+            }
             return jsonify(success=True, result=result)
 
         Logger.log_success("Started application server successfully")
