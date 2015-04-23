@@ -53,12 +53,6 @@ class WebApp:
 
             return jsonify(success=True, result=result)
 
-        @self.app.route('/api/enrich')
-        def enrich_api():
-            text = request.args['text']
-            result = self.enricher.enrich(text)
-            return jsonify(success=True, result=result)
-
         @self.app.route('/api/lexus/simplify')
         def lexus_simplify_api():
             text = request.args['text']
@@ -72,6 +66,12 @@ class WebApp:
             text = request.args['text']
 
             result = self.syntactic_simplifier.simplify(text, False, True)
+            return jsonify(success=True, result=result)
+
+        @self.app.route('/api/enrich')
+        def enrich_api():
+            text = request.args['text']
+            result = self.enricher.enrich(text)
             return jsonify(success=True, result=result)
 
         Logger.log_success("Started application server successfully")
