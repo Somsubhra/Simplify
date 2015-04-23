@@ -15,7 +15,7 @@ class SyntacticSimplifier:
         self.breaker = Breaker()
 
     # Simplify content
-    def simplify(self, content, plot_tree=False):
+    def simplify(self, content, plot_tree=False, detailed=False):
         results = []
 
         sentences = re.split('\.|!|\?', content)
@@ -30,7 +30,7 @@ class SyntacticSimplifier:
             parse_trees = self.parser.parse(sentence, plot_tree)
 
             for parse_tree in parse_trees:
-                broken_string = self.breaker.break_tree(parse_tree)
+                broken_string = self.breaker.break_tree(parse_tree, detailed)
 
                 results.append({
                     "tree": str(parse_tree),

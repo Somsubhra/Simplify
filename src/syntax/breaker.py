@@ -11,7 +11,7 @@ from infix_coordination import InfixCoordination
 import re
 
 
-# Constructor for the breaker class
+# The breaker class
 class Breaker:
 
     # Constructor for the breaker class
@@ -24,12 +24,7 @@ class Breaker:
         self.infix_coordination = InfixCoordination()
 
     # Break the tree
-    def break_tree(self, tree):
-        apposition_result = self.appositions.break_tree(tree)
-        relative_clause_result = self.relative_clauses.break_tree(tree)
-        prefix_subordination_result = self.prefix_subordination.break_tree(tree)
-        infix_subordination_result = self.infix_subordination.break_tree(tree)
-        infix_coordination_result = self.infix_coordination.break_tree(tree)
+    def break_tree(self, tree, detailed=False):
 
         res_1 = self.appositions.break_tree(tree)
         res_2 = self.break_tree_with_type(res_1, self.relative_clauses)
@@ -37,15 +32,26 @@ class Breaker:
         res_4 = self.break_tree_with_type(res_3, self.infix_subordination)
         res_5 = self.break_tree_with_type(res_4, self.infix_coordination)
 
-        return {
-            "original": ' '.join(tree.leaves()),
-            "final": res_5,
-            "apposition": apposition_result,
-            "relative_clause": relative_clause_result,
-            'prefix_subordination': prefix_subordination_result,
-            "infix_subordination": infix_subordination_result,
-            "infix_coordination": infix_coordination_result
-        }
+        if detailed:
+            apposition_result = self.appositions.break_tree(tree)
+            relative_clause_result = self.relative_clauses.break_tree(tree)
+            prefix_subordination_result = self.prefix_subordination.break_tree(tree)
+            infix_subordination_result = self.infix_subordination.break_tree(tree)
+            infix_coordination_result = self.infix_coordination.break_tree(tree)
+
+            return {
+                "original": ' '.join(tree.leaves()),
+                "final": res_5,
+                "apposition": apposition_result,
+                "relative_clause": relative_clause_result,
+                'prefix_subordination': prefix_subordination_result,
+                "infix_subordination": infix_subordination_result,
+                "infix_coordination": infix_coordination_result
+            }
+        else:
+            return {
+                "final": res_5
+            }
 
     def break_tree_with_type(self, string, breaker_type):
         sentences = re.split('\.|!|\?', string)
